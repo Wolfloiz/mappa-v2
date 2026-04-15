@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progressão Pessoal — Ramo Sênior</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Habilidades Para a Vida — vermelho/rosa */
+  --hab-dark:  #C62828; --hab-mid: #E53935; --hab-light: #FFEBEE; --hab-border: #EF9A9A;
+  /* Consumo Responsável — verde */
+  --con-dark:  #2E7D32; --con-mid: #43A047; --con-light: #E8F5E9; --con-border: #A5D6A7;
+  /* Paz e Desenvolvimento — azul */
+  --paz-dark:  #1565C0; --paz-mid: #1E88E5; --paz-light: #E3F2FD; --paz-border: #90CAF9;
+  /* Saúde e Bem estar — laranja */
+  --sau-dark:  #E65100; --sau-mid: #FB8C00; --sau-light: #FFF3E0; --sau-border: #FFCC80;
+  /* UI neutros */
+  --cinza: #546E7A; --cinza-claro: #ECEFF1;
+  --branco: #FFFFFF; --fundo: #F5F5F5;
+  --texto: #212121; --texto-sec: #455A64; --borda: #B0BEC5;
+  --sombra: 0 2px 12px rgba(0,0,0,0.08);
+  --radius: 14px; --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #B71C1C 0%, #C62828 60%, #37474F 100%);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(183,28,28,0.30);
+}
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.header-logo {
+  width: 42px;
+  height: 42px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.header-titles { flex: 1; }
+.header-titles h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+.header-titles p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+  margin-top: 1px;
+}
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 6px 12px 6px 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.header-user:hover { background: rgba(255,255,255,0.25); }
+.user-avatar {
+  width: 28px; height: 28px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800;
+  color: #C62828;
+}
+.header-user span { font-size: 13px; font-weight: 700; color: #fff; }
+
+/* SCREENS */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* SETUP SCREEN */
+.setup-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  background: linear-gradient(160deg, #FFEBEE 0%, #F5F5F5 50%, #FFF3E0 100%);
+}
+.setup-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 40px 36px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+}
+.setup-logo {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.setup-logo .fleur { font-size: 52px; display: block; }
+.setup-logo h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: #C62828;
+  margin-top: 8px;
+}
+.setup-logo p { font-size: 13px; color: var(--cinza); margin-top: 4px; }
+
+.setup-step {
+  display: none;
+}
+.setup-step.active { display: block; }
+
+.step-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--texto);
+  margin-bottom: 6px;
+}
+.step-desc {
+  font-size: 13px;
+  color: var(--texto-sec);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cinza);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 6px;
+}
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--borda);
+  border-radius: var(--radius-sm);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  color: var(--texto);
+  background: #fff;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-group input:focus, .form-group select:focus {
+  border-color: #C62828;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-primary {
+  background: #C62828;
+  color: #fff;
+  width: 100%;
+}
+.btn-primary:hover { background: #B71C1C; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-secondary {
+  background: var(--cinza-claro);
+  color: var(--cinza);
+  width: 100%;
+  margin-top: 8px;
+}
+
+.modal-badge {
+  background: #FFEBEE;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #C62828;
+  line-height: 1.5;
+}
+.modal-badge strong { font-weight: 800; }
+
+/* MODALIDADE PICKER */
+.modal-picker {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.modal-option {
+  flex: 1;
+  border: 2px solid var(--borda);
+  border-radius: var(--radius-sm);
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fff;
+}
+.modal-option:hover { border-color: #C62828; }
+.modal-option.selected {
+  border-color: #C62828;
+  background: #FFEBEE;
+}
+.modal-option .icon { font-size: 22px; display: block; margin-bottom: 4px; }
+.modal-option .label { font-size: 12px; font-weight: 700; color: var(--texto-sec); }
+.modal-option.selected .label { color: #C62828; }
+
+/* MAIN APP */
+.app-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 16px 60px;
+}
+
+/* PROGRESS SUMMARY */
+.progress-summary {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--sombra);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.progress-summary-text { flex: 1; min-width: 160px; }
+.progress-summary-text h3 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--texto);
+}
+.progress-summary-text p { font-size: 12px; color: var(--cinza); margin-top: 2px; }
+.big-progress {
+  flex: 2;
+  min-width: 200px;
+}
+.big-bar-bg {
+  background: var(--cinza-claro);
+  border-radius: 10px;
+  height: 12px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.big-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #1976D2, #42A5F5);
+  transition: width 0.6s ease;
+}
+.big-bar-label {
+  font-size: 12px;
+  color: var(--cinza);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* EIXO TABS */
+.eixo-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 20px;
+  scrollbar-width: none;
+}
+.eixo-tabs::-webkit-scrollbar { display: none; }
+.eixo-tab {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid var(--borda);
+  background: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--cinza);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.eixo-tab:hover { border-color: var(--cinza); color: var(--texto); }
+.eixo-tab.active {
+  border-color: transparent;
+  color: #fff;
+}
+
+/* BLOCO CARD */
+.blocos-list { display: flex; flex-direction: column; gap: 16px; }
+
+.bloco-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.bloco-card:hover { box-shadow: 0 4px 24px rgba(25,118,210,0.15); }
+
+.bloco-header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--cinza-claro);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.bloco-header-info { flex: 1; }
+.bloco-id-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.bloco-nome {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--texto);
+  line-height: 1.3;
+}
+.bloco-chevron {
+  font-size: 18px;
+  color: var(--cinza);
+  margin-top: 2px;
+  transition: transform 0.25s;
+}
+.bloco-card.open .bloco-chevron { transform: rotate(180deg); }
+
+/* PROGRESS BAR */
+.bloco-progress-wrap {
+  padding: 0 20px 14px;
+}
+.bloco-progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.bloco-progress-label { font-size: 12px; color: var(--cinza); }
+.bloco-progress-pct {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--eixo-dark, #546E7A);
+}
+.bloco-bar-bg {
+  background: var(--cinza-claro);
+  border-radius: 6px;
+  height: 7px;
+  overflow: hidden;
+}
+.bloco-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+.bloco-complete-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-left: 8px;
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+/* BLOCO BODY */
+.bloco-body {
+  display: none;
+  padding: 0 20px 20px;
+}
+.bloco-card.open .bloco-body { display: block; }
+
+/* SECTION LABELS */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 10px;
+}
+.section-label-icon {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.section-label-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+}
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 10px;
+  color: var(--cinza);
+  font-size: 12px;
+  font-weight: 700;
+}
+.section-divider::before, .section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--borda);
+}
+
+/* ATIVIDADE ITEM — defaults (eixo classes override via parent) */
+.atividade-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--cinza-claro);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.18s;
+  background: #FAFAFA;
+}
+
+.ativ-checkbox {
+  width: 20px; height: 20px;
+  border: 2px solid var(--borda);
+  border-radius: 5px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.18s;
+  background: #fff;
+}
+.ativ-check-icon { color: #fff; font-size: 13px; display: none; }
+.atividade-item.checked .ativ-check-icon { display: block; }
+
+.ativ-info { flex: 1; }
+.ativ-texto {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--texto);
+}
+
+.ativ-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 20px;
+  margin-top: 4px;
+}
+.ativ-badge-mar { background: #E3F2FD; color: #1565C0; }
+.ativ-badge-ar  { background: #E8EAF6; color: #3949AB; }
+
+/* SECTION LABELS */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 10px;
+}
+.section-label-icon {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.section-label-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+}
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 10px;
+  color: var(--cinza);
+  font-size: 12px;
+  font-weight: 700;
+}
+.section-divider::before, .section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--borda);
+}
+
+/* OU SECTION — uses eixo CSS var */
+.ou-section {
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-top: 6px;
+  border: 1.5px dashed var(--eixo-border, #A5D6A7);
+  background: var(--eixo-light, #E8F5E9);
+}
+.ou-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--eixo-dark, #2E7D32);
+  margin-bottom: 4px;
+}
+.ou-desc { font-size: 12px; color: var(--eixo-mid, #43A047); margin-bottom: 10px; }
+
+/* VARIAVEIS INFO BOX — uses eixo CSS var */
+.variaveis-info {
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin: 8px 0 4px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--eixo-light, #FFF3E0);
+  color: var(--eixo-dark, #E65100);
+}
+.variaveis-info strong { font-weight: 800; }
+
+/* LOADING */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.spinner {
+  width: 44px; height: 44px;
+  border: 4px solid #FFEBEE;
+  border-top-color: #C62828;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-overlay p { font-size: 14px; color: var(--cinza); font-weight: 600; }
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #263238;
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 999;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.success { background: #2E7D32; }
+.toast.error   { background: #C62828; }
+
+/* EIXO COLORS — Habilidades=vermelho, Consumo=verde, Paz=azul, Saúde=laranja */
+.eixo-Habilidades { --eixo-dark: #C62828; --eixo-mid: #E53935; --eixo-light: #FFEBEE; --eixo-border: #EF9A9A; }
+.eixo-Consumo      { --eixo-dark: #2E7D32; --eixo-mid: #43A047; --eixo-light: #E8F5E9; --eixo-border: #A5D6A7; }
+.eixo-Paz          { --eixo-dark: #1565C0; --eixo-mid: #1E88E5; --eixo-light: #E3F2FD; --eixo-border: #90CAF9; }
+.eixo-Saude        { --eixo-dark: #E65100; --eixo-mid: #FB8C00; --eixo-light: #FFF3E0; --eixo-border: #FFCC80; }
+
+/* Tab active backgrounds */
+.eixo-tab.eixo-Habilidades.active { background: #C62828; border-color: #C62828; color: #fff; }
+.eixo-tab.eixo-Consumo.active     { background: #2E7D32; border-color: #2E7D32; color: #fff; }
+.eixo-tab.eixo-Paz.active         { background: #1565C0; border-color: #1565C0; color: #fff; }
+.eixo-tab.eixo-Saude.active       { background: #E65100; border-color: #E65100; color: #fff; }
+
+/* Tab hover */
+.eixo-tab.eixo-Habilidades:not(.active):hover { border-color: #C62828; color: #C62828; }
+.eixo-tab.eixo-Consumo:not(.active):hover      { border-color: #2E7D32; color: #2E7D32; }
+.eixo-tab.eixo-Paz:not(.active):hover          { border-color: #1565C0; color: #1565C0; }
+.eixo-tab.eixo-Saude:not(.active):hover        { border-color: #E65100; color: #E65100; }
+
+/* ID badges */
+.eixo-Habilidades .bloco-id-badge { background: #FFEBEE; color: #C62828; }
+.eixo-Consumo .bloco-id-badge     { background: #E8F5E9; color: #2E7D32; }
+.eixo-Paz .bloco-id-badge         { background: #E3F2FD; color: #1565C0; }
+.eixo-Saude .bloco-id-badge       { background: #FFF3E0; color: #E65100; }
+
+/* Progress bars */
+.eixo-Habilidades .bloco-bar-fill { background: linear-gradient(90deg, #C62828, #EF9A9A); }
+.eixo-Consumo .bloco-bar-fill     { background: linear-gradient(90deg, #2E7D32, #81C784); }
+.eixo-Paz .bloco-bar-fill         { background: linear-gradient(90deg, #1565C0, #64B5F6); }
+.eixo-Saude .bloco-bar-fill       { background: linear-gradient(90deg, #E65100, #FFB74D); }
+
+/* Checked activity items per eixo */
+.eixo-Habilidades .atividade-item.checked { background: #FFEBEE; border-color: #E53935; }
+.eixo-Habilidades .atividade-item.checked .ativ-checkbox { background: #C62828; border-color: #C62828; }
+.eixo-Habilidades .atividade-item.checked .ativ-texto { color: #C62828; }
+.eixo-Habilidades .atividade-item:not(.checked):hover { border-color: #E53935; background: #FFF5F5; }
+
+.eixo-Consumo .atividade-item.checked { background: #E8F5E9; border-color: #43A047; }
+.eixo-Consumo .atividade-item.checked .ativ-checkbox { background: #2E7D32; border-color: #2E7D32; }
+.eixo-Consumo .atividade-item.checked .ativ-texto { color: #2E7D32; }
+.eixo-Consumo .atividade-item:not(.checked):hover { border-color: #43A047; background: #F5FBF5; }
+
+.eixo-Paz .atividade-item.checked { background: #E3F2FD; border-color: #1E88E5; }
+.eixo-Paz .atividade-item.checked .ativ-checkbox { background: #1565C0; border-color: #1565C0; }
+.eixo-Paz .atividade-item.checked .ativ-texto { color: #1565C0; }
+.eixo-Paz .atividade-item:not(.checked):hover { border-color: #1E88E5; background: #F5F9FF; }
+
+.eixo-Saude .atividade-item.checked { background: #FFF3E0; border-color: #FB8C00; }
+.eixo-Saude .atividade-item.checked .ativ-checkbox { background: #E65100; border-color: #E65100; }
+.eixo-Saude .atividade-item.checked .ativ-texto { color: #E65100; }
+.eixo-Saude .atividade-item:not(.checked):hover { border-color: #FB8C00; background: #FFFBF5; }
+
+/* Complete badge per eixo */
+.eixo-Habilidades .bloco-complete-badge { background: #FFEBEE; color: #C62828; }
+.eixo-Consumo .bloco-complete-badge     { background: #E8F5E9; color: #2E7D32; }
+.eixo-Paz .bloco-complete-badge         { background: #E3F2FD; color: #1565C0; }
+.eixo-Saude .bloco-complete-badge       { background: #FFF3E0; color: #E65100; }
+
+@media (max-width: 600px) {
+  .setup-card { padding: 28px 20px; }
+  .header-titles h1 { font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loadingOverlay" style="display:none;">
+  <div class="spinner"></div>
+  <p id="loadingText">Carregando...</p>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- SETUP SCREEN -->
+<div class="screen active" id="screenSetup">
+  <div class="setup-wrap">
+    <div class="setup-card">
+      <div class="setup-logo">
+        <span class="fleur">⚜️</span>
+        <h2>Progressão Pessoal</h2>
+        <p>Ramo Sênior — Movimento Escoteiro</p>
+      </div>
+
+      <!-- STEP 1: Spreadsheet URL -->
+      <div class="setup-step active" id="step1">
+        <div class="step-title">Bem-vindo(a)! 👋</div>
+        <div class="step-desc">
+          Para começar, informe o link da planilha de resultados (Planilha 2 — Progressões) onde seus dados serão salvos.
+        </div>
+        <div class="modal-badge">
+          <strong>Atenção:</strong> A planilha deve estar aberta para edição e configurada com um Apps Script publicado. Veja as instruções na documentação.
+        </div>
+        <div class="form-group">
+          <label>URL da Planilha de Resultados</label>
+          <input type="url" id="sheetUrl" placeholder="https://docs.google.com/spreadsheets/d/..." autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label>URL do Apps Script (Web App)</label>
+          <input type="url" id="scriptUrl" placeholder="https://script.google.com/macros/s/..." autocomplete="off">
+        </div>
+        <button class="btn btn-primary" onclick="goStep2()">Continuar →</button>
+      </div>
+
+      <!-- STEP 2: Register -->
+      <div class="setup-step" id="step2">
+        <div class="step-title">Identificação</div>
+        <div class="step-desc">Informe seu número de registro e nome completo para buscar ou criar seu perfil.</div>
+        <div class="form-group">
+          <label>Número de Registro</label>
+          <input type="text" id="numRegistro" placeholder="Ex: 12345678" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label>Nome Completo</label>
+          <input type="text" id="nomeCompleto" placeholder="Seu nome completo" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label>Modalidade da UEL</label>
+          <div class="modal-picker">
+            <div class="modal-option selected" id="modNone" onclick="selectMod('NENHUMA')">
+              <span class="icon">🏕️</span>
+              <span class="label">Padrão</span>
+            </div>
+            <div class="modal-option" id="modMar" onclick="selectMod('MAR')">
+              <span class="icon">⛵</span>
+              <span class="label">Mar</span>
+            </div>
+            <div class="modal-option" id="modAr" onclick="selectMod('AR')">
+              <span class="icon">✈️</span>
+              <span class="label">Ar</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="doLogin()">Entrar no Aplicativo →</button>
+        <button class="btn btn-secondary" onclick="goStep1()">← Voltar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP SCREEN -->
+<div class="screen" id="screenApp">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-inner">
+      <div class="header-logo">⚜️</div>
+      <div class="header-titles">
+        <h1>Progressão Pessoal</h1>
+        <p>Ramo Sênior</p>
+      </div>
+      <div class="header-user" onclick="showChangeUser()">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <span id="userName">Jovem</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-wrap">
+    <!-- PROGRESS SUMMARY -->
+    <div class="progress-summary">
+      <div class="progress-summary-text">
+        <h3 id="summaryName">Jovem</h3>
+        <p id="summaryReg">Reg. #</p>
+      </div>
+      <div class="big-progress">
+        <div class="big-bar-bg">
+          <div class="big-bar-fill" id="bigBarFill" style="width:0%;background:linear-gradient(90deg,#C62828,#FB8C00)"></div>
+        </div>
+        <div class="big-bar-label">
+          <span id="summaryBlocks">0 blocos concluídos</span>
+          <span id="summaryPct">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EIXO TABS -->
+    <div class="eixo-tabs" id="eixoTabs"></div>
+
+    <!-- BLOCOS -->
+    <div class="blocos-list" id="blocosList"></div>
+  </div><!-- /app-wrap -->
+
+  <!-- FOOTER -->
+  <footer style="text-align:center;padding:18px 16px 28px;font-size:11px;color:#90A4AE;font-family:'Nunito Sans',sans-serif;border-top:1px solid #ECEFF1;margin-top:8px;background:#FAFAFA;">
+    Elaborado por <strong style="color:#546E7A;">Percival Palmiro</strong>, 23º GeAMG — Baleia &nbsp;·&nbsp; Com Auxílio de IA
+  </footer>
+
+</div><!-- /screenApp -->
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const BLOCOS = [
+  {id:"ACDV",nome:"Aprendizagem contínua e desenvolvimento vocacional",qtdVar:3,ordem:1,eixo:"Habilidades Para a Vida"},
+  {id:"AL",nome:"Autonomia e liderança",qtdVar:4,ordem:2,eixo:"Habilidades Para a Vida"},
+  {id:"CI",nome:"Criatividade e inovação",qtdVar:3,ordem:3,eixo:"Habilidades Para a Vida"},
+  {id:"IE",nome:"Inteligência emocional",qtdVar:4,ordem:4,eixo:"Habilidades Para a Vida"},
+  {id:"CR",nome:"Consumo responsável",qtdVar:4,ordem:5,eixo:"Consumo Responsável"},
+  {id:"MC",nome:"Mudanças climáticas",qtdVar:4,ordem:6,eixo:"Consumo Responsável"},
+  {id:"PB",nome:"Preservação da biodiversidade",qtdVar:2,ordem:7,eixo:"Consumo Responsável"},
+  {id:"VAL_vida",nome:"Vida ao ar livre",qtdVar:5,ordem:8,eixo:"Consumo Responsável"},
+  {id:"COM",nome:"Comunidade",qtdVar:2,ordem:9,eixo:"Paz e Desenvolvimento"},
+  {id:"DEM",nome:"Democracia",qtdVar:4,ordem:10,eixo:"Paz e Desenvolvimento"},
+  {id:"HC",nome:"Herança cultural",qtdVar:5,ordem:11,eixo:"Paz e Desenvolvimento"},
+  {id:"PP",nome:"Promoção da paz",qtdVar:5,ordem:12,eixo:"Paz e Desenvolvimento"},
+  {id:"VAL_val",nome:"Valores",qtdVar:2,ordem:13,eixo:"Paz e Desenvolvimento"},
+  {id:"CC",nome:"Cuidado com o corpo",qtdVar:2,ordem:14,eixo:"Saúde e Bem estar"},
+  {id:"ESP",nome:"Espiritualidade",qtdVar:3,ordem:15,eixo:"Saúde e Bem estar"},
+  {id:"HS",nome:"Hábitos saudáveis",qtdVar:2,ordem:16,eixo:"Saúde e Bem estar"},
+  {id:"SM",nome:"Saúde mental",qtdVar:3,ordem:17,eixo:"Saúde e Bem estar"},
+  {id:"VS",nome:"Vínculos saudáveis",qtdVar:3,ordem:18,eixo:"Saúde e Bem estar"},
+];
+
+const ATIVIDADES_RAW = [
+  // ACDV
+  {id:"ACDV1",bloco:"ACDV",nome:"Conquistar, no Ramo Sênior, uma especialidade sobre um tema de seu interesse e que seja um conhecimento novo",tipo:"Obrigatória",mod:""},
+  {id:"ACDV2",bloco:"ACDV",nome:"Organizar e realizar, com a patrulha, uma visita a um aeroporto ou aeroclube, identificando tipos de aeronaves, procedimentos de pouso e decolagem, e sinalização de pista.",tipo:"Obrigatória",mod:"AR"},
+  {id:"ACDV3",bloco:"ACDV",nome:"Organizar e realizar, com a patrulha, uma visita a um porto, marina ou iate clube, conhecendo seu funcionamento, tipos de embarcações e sinalizações de tráfego.",tipo:"Obrigatória",mod:"MAR"},
+  {id:"ACDV4",bloco:"ACDV",nome:"Explorar diferentes áreas profissionais participando de uma Feira de Profissões ou entrevistando profissionais da área de interesse.",tipo:"Variável",mod:""},
+  {id:"ACDV5",bloco:"ACDV",nome:"Engajar-se em atividades voluntárias ou estágios em instituições que despertem interesse.",tipo:"Variável",mod:""},
+  {id:"ACDV6",bloco:"ACDV",nome:"Participar de palestras, workshops ou vivências voltadas à orientação vocacional, planejamento de carreira e desenvolvimento pessoal.",tipo:"Variável",mod:""},
+  {id:"ACDV7",bloco:"ACDV",nome:"Organizar uma atividade para a patrulha ou tropa voltada para escolha vocacional.",tipo:"Variável",mod:""},
+  {id:"ACDV8",bloco:"ACDV",nome:"Organizar, para sua tropa ou patrulha, uma oficina, curso ou palestra sobre um tema de seu interesse.",tipo:"Variável",mod:""},
+  {id:"ACDV9",bloco:"ACDV",nome:"Participar de feiras, mostras ou eventos escolares/científicos, fora do Movimento Escoteiro, apresentando trabalhos ou projetos.",tipo:"Variável",mod:""},
+  {id:"ACDVESP1",bloco:"ACDV",nome:"Especialidade: Gastronomia, Tecnologia, Educação ou Idiomas",tipo:"Ou",mod:""},
+  {id:"ACDVINSG1",bloco:"ACDV",nome:"Insígnia: Aprender, Mar-Naval ou Ar-Aeronauta",tipo:"Ou",mod:""},
+  // AL
+  {id:"AL1",bloco:"AL",nome:"Conhecer o material individual e de patrulha para diferentes tipos de excursões e saber organizá-lo na mochila.",tipo:"Obrigatória",mod:""},
+  {id:"AL2",bloco:"AL",nome:"Construir e navegar com sua patrulha em embarcação a vela ou remo, identificando as partes, utilizando colete salva-vidas e seguindo regras de segurança.",tipo:"Obrigatória",mod:"MAR"},
+  {id:"AL3",bloco:"AL",nome:"Participar ativamente do planejamento, execução e avaliação de atividades da patrulha, tropa ou equipe de interesse.",tipo:"Variável",mod:""},
+  {id:"AL4",bloco:"AL",nome:"Desenvolver o planejamento orçamentário de uma atividade de patrulha, equipe de interesse ou tropa.",tipo:"Variável",mod:""},
+  {id:"AL5",bloco:"AL",nome:"Utilizar transporte coletivo urbano para uma atividade externa de patrulha.",tipo:"Variável",mod:""},
+  {id:"AL6",bloco:"AL",nome:"Implementar uma estratégia, incluindo a parte financeira, para alcançar uma meta pessoal, compartilhando com sua patrulha.",tipo:"Variável",mod:""},
+  {id:"AL7",bloco:"AL",nome:"Planejar e executar um projeto de captação de recursos para participação em uma atividade escoteira ou projeto pessoal.",tipo:"Variável",mod:""},
+  {id:"AL8",bloco:"AL",nome:"Assumir e desempenhar diferentes encargos na patrulha, sendo bem avaliado.",tipo:"Variável",mod:""},
+  {id:"AL9",bloco:"AL",nome:"Planejar e conduzir um grande jogo para a tropa, com apoio da patrulha ou equipe de interesse.",tipo:"Variável",mod:""},
+  {id:"ALESP1",bloco:"AL",nome:"Especialidade: Empreendedorismo e Negócios, Finanças e Economia, Liderança e Gestão ou Viagens",tipo:"Ou",mod:""},
+  // CI
+  {id:"CI1",bloco:"CI",nome:"Durante um acampamento, planejar e executar pioneirias inovadoras de médio ou grande porte.",tipo:"Obrigatória",mod:""},
+  {id:"CI2",bloco:"CI",nome:"Organizar um torneio aéreo com categorias como avião de papel, pipa, planador e foguete.",tipo:"Obrigatória",mod:"AR"},
+  {id:"CI3",bloco:"CI",nome:"Organizar e conduzir um Fogo de Conselho ou show de talentos para a tropa, UEL ou comunidade.",tipo:"Variável",mod:""},
+  {id:"CI4",bloco:"CI",nome:"Organizar uma noite cultural para sua patrulha ou tropa.",tipo:"Variável",mod:""},
+  {id:"CI5",bloco:"CI",nome:"Produzir um curta metragem ou vídeo criativo sobre Escotismo.",tipo:"Variável",mod:""},
+  {id:"CI6",bloco:"CI",nome:"Organizar uma apresentação artística ou cultural voltada à comunidade.",tipo:"Variável",mod:""},
+  {id:"CI7",bloco:"CI",nome:"Planejar e realizar mostra sobre um tema de seu interesse, produzindo e curando registros para apresentação.",tipo:"Variável",mod:""},
+  {id:"CI8",bloco:"CI",nome:"Participar de concursos culturais, literários ou artísticos locais, representando a tropa.",tipo:"Variável",mod:""},
+  {id:"CIESP1",bloco:"CI",nome:"Especialidade: Comunicações",tipo:"Ou",mod:""},
+  {id:"CIINSG1",bloco:"CI",nome:"Insígnia: Inovadores de Impacto",tipo:"Ou",mod:""},
+  // IE
+  {id:"IE1",bloco:"IE",nome:"Reconhecer situações que comprometam a integridade física ou emocional, sabendo como agir e a quem recorrer.",tipo:"Obrigatória",mod:""},
+  {id:"IE2",bloco:"IE",nome:"Praticar feedback construtivo durante as atividades, expressando opiniões de forma assertiva e respeitosa.",tipo:"Obrigatória",mod:""},
+  {id:"IE3",bloco:"IE",nome:"Identificar as mudanças de emoção repentinas, equilibrando as decisões e reações.",tipo:"Variável",mod:""},
+  {id:"IE4",bloco:"IE",nome:"Envolver-se em atividades aventureiras com segurança, conhecendo seus limites e enfrentando seus medos.",tipo:"Variável",mod:""},
+  {id:"IE5",bloco:"IE",nome:"Identificar situações que causam estresse ou desconforto e formas de solucioná-las.",tipo:"Variável",mod:""},
+  {id:"IE6",bloco:"IE",nome:"Negociar responsabilidades familiares e pessoais de forma respeitosa e madura.",tipo:"Variável",mod:""},
+  {id:"IE7",bloco:"IE",nome:"Conduzir dinâmicas de confiança e cooperação que envolvam lidar com frustrações e celebrar conquistas coletivas.",tipo:"Variável",mod:""},
+  // CR
+  {id:"CR1",bloco:"CR",nome:"Liderar a separação de resíduos recicláveis e orgânicos em uma festa da UEL, comunidade ou eventos.",tipo:"Variável",mod:""},
+  {id:"CR2",bloco:"CR",nome:"Visitar uma estação de tratamento de esgoto, aterro sanitário ou cooperativa de reciclagem.",tipo:"Variável",mod:""},
+  {id:"CR3",bloco:"CR",nome:"Desenvolver um projeto sobre descarte correto de materiais eletrônicos na UEL, comunidade ou escola.",tipo:"Variável",mod:""},
+  {id:"CR4",bloco:"CR",nome:"Organizar oficina, debate ou workshop sobre consumo responsável (Cruelty-free, Veganismo, Upcycling, etc.).",tipo:"Variável",mod:""},
+  {id:"CR5",bloco:"CR",nome:"Em um acampamento, executar uma receita com cascas, talos ou sobras.",tipo:"Variável",mod:""},
+  {id:"CR6",bloco:"CR",nome:"Organizar um brechó beneficente ou feira de trocas em sua UEL ou comunidade.",tipo:"Variável",mod:""},
+  {id:"CR7",bloco:"CR",nome:"Participar de visita a cooperativa de reciclagem ou projeto comunitário ligado à economia circular.",tipo:"Variável",mod:""},
+  {id:"CRESP1",bloco:"CR",nome:"Especialidade: Agricultura Sustentável",tipo:"Ou",mod:""},
+  {id:"CRINSG1",bloco:"CR",nome:"Insígnia: Reduzir, Reciclar, Reutilizar",tipo:"Ou",mod:""},
+  // MC
+  {id:"MC1",bloco:"MC",nome:"Utilizar ferramentas de acompanhamento meteorológico para o planejamento de atividades ao ar livre.",tipo:"Variável",mod:""},
+  {id:"MC2",bloco:"MC",nome:"Desenvolver iniciativas ou projetos sobre mudanças climáticas e soluções sustentáveis.",tipo:"Variável",mod:""},
+  {id:"MC3",bloco:"MC",nome:"Organizar, com sua patrulha, uma atividade ecológica em área urbana.",tipo:"Variável",mod:""},
+  {id:"MC4",bloco:"MC",nome:"Participar de clubes ou projetos voltados para sustentabilidade e mudanças climáticas.",tipo:"Variável",mod:""},
+  {id:"MC5",bloco:"MC",nome:"Utilizar e promover o uso do transporte coletivo, bicicleta ou caminhada em atividade escoteira.",tipo:"Variável",mod:""},
+  {id:"MC6",bloco:"MC",nome:"Planejar e executar em patrulha um projeto comunitário de reaproveitamento de recursos naturais ou energias renováveis.",tipo:"Variável",mod:""},
+  {id:"MCESP1",bloco:"MC",nome:"Especialidade: Sustentabilidade",tipo:"Ou",mod:""},
+  {id:"MCINSG1",bloco:"MC",nome:"Insígnia: Escoteiros pela Energia Solar",tipo:"Ou",mod:""},
+  // PB
+  {id:"PB1",bloco:"PB",nome:"Participar de atividade em Área de Proteção Ambiental, reconhecendo fauna, flora e bioma local.",tipo:"Obrigatória",mod:""},
+  {id:"PB2",bloco:"PB",nome:"Participar de atividade de Observação de Aves da região, identificando hábitos e relação com voo e aerodinâmica.",tipo:"Obrigatória",mod:"AR"},
+  {id:"PB3",bloco:"PB",nome:"Conhecer o bioma aquático local, seus riscos e a importância de sua preservação.",tipo:"Obrigatória",mod:"MAR"},
+  {id:"PB4",bloco:"PB",nome:"Participar de eventos sobre preservação da biodiversidade organizados por ONGs, escolas ou parques naturais.",tipo:"Variável",mod:""},
+  {id:"PB5",bloco:"PB",nome:"Colaborar em um projeto ou ação promovido por alguma ONG ambiental.",tipo:"Variável",mod:""},
+  {id:"PB6",bloco:"PB",nome:"Coletar e registrar dados sobre espécies locais, qualidade da água ou vegetação.",tipo:"Variável",mod:""},
+  {id:"PB7",bloco:"PB",nome:"Organizar projeto sobre abrigos de animais silvestres, enriquecimento ambiental ou reintegração de animais.",tipo:"Variável",mod:""},
+  {id:"PB8",bloco:"PB",nome:"Organizar o plantio de árvores nativas em parceria com órgãos ambientais ou ONGs.",tipo:"Variável",mod:""},
+  {id:"PB9",bloco:"PB",nome:"Conduzir campanha de conscientização sobre preservação da fauna e flora.",tipo:"Variável",mod:""},
+  {id:"PB10",bloco:"PB",nome:"Promover palestras ou oficinas abertas à comunidade sobre redução de impactos ambientais.",tipo:"Variável",mod:""},
+  {id:"PBESP1",bloco:"PB",nome:"Especialidade: Natureza e Ciências Naturais ou Educação Ambiental",tipo:"Ou",mod:""},
+  {id:"PBINSG1",bloco:"PB",nome:"Insígnia: Campeões da Natureza",tipo:"Ou",mod:""},
+  // VAL vida
+  {id:"VALV1",bloco:"VAL_vida",nome:"Montar o campo de patrulha com pioneirias como mesa, canto do lenhador e pórtico.",tipo:"Obrigatória",mod:""},
+  {id:"VALV2",bloco:"VAL_vida",nome:"Aplicar os seguintes nós: direito, correr, lais de guia, volta do fiel, nó em oito, balso pelo seio, catau, volta do salteador e boca de lobo.",tipo:"Obrigatória",mod:""},
+  {id:"VALV3",bloco:"VAL_vida",nome:"Escolher corretamente o local para montagem da barraca, incluindo técnicas de montagem, desmontagem e acondicionamento.",tipo:"Obrigatória",mod:""},
+  {id:"VALV4",bloco:"VAL_vida",nome:"Manusear corretamente ferramentas de corte e sapa, zelando pela segurança e realizando reparos.",tipo:"Obrigatória",mod:""},
+  {id:"VALV5",bloco:"VAL_vida",nome:"Preparar e executar pelo menos três tipos de fogueiras, utilizando-as para preparar uma refeição mateira.",tipo:"Obrigatória",mod:""},
+  {id:"VALV6",bloco:"VAL_vida",nome:"Planejar e realizar ao menos uma excursão de patrulha em um ambiente natural.",tipo:"Obrigatória",mod:""},
+  {id:"VALV7",bloco:"VAL_vida",nome:"Planejar e realizar ao menos um acampamento de patrulha com técnicas de campismo de baixo impacto.",tipo:"Obrigatória",mod:""},
+  {id:"VALV8",bloco:"VAL_vida",nome:"Em atividade ao ar livre, orientar-se utilizando carta topográfica ou náutica e bússola.",tipo:"Obrigatória",mod:""},
+  {id:"VALV9",bloco:"VAL_vida",nome:"Utilizar nós de modalidade de mar: Lais de guia, nó de cunho, pinha de retinida e nó de defensa.",tipo:"Obrigatória",mod:"MAR"},
+  {id:"VALV10",bloco:"VAL_vida",nome:"Participar de um acampamento volante.",tipo:"Variável",mod:""},
+  {id:"VALV11",bloco:"VAL_vida",nome:"Selecionar corretamente os materiais de campo para um acampamento de patrulha.",tipo:"Variável",mod:""},
+  {id:"VALV12",bloco:"VAL_vida",nome:"Em conjunto com a sua patrulha, planejar e construir pelo menos uma pioneiria: barraca suspensa, torre de observação ou ponte.",tipo:"Variável",mod:""},
+  {id:"VALV13",bloco:"VAL_vida",nome:"Demonstrar conhecimento sobre processos de ancoragem e estiramento de cabos.",tipo:"Variável",mod:""},
+  {id:"VALV14",bloco:"VAL_vida",nome:"Utilizar diferentes formas de acondicionamento de alimentos e técnicas de purificação de água em acampamento.",tipo:"Variável",mod:""},
+  {id:"VALV15",bloco:"VAL_vida",nome:"Durante um acampamento de patrulha ou tropa, pernoitar em um abrigo natural.",tipo:"Variável",mod:""},
+  {id:"VALV16",bloco:"VAL_vida",nome:"Durante uma atividade aventureira, pernoitar uma noite em bivaque, abrigo natural ou ao relento.",tipo:"Variável",mod:""},
+  {id:"VALV17",bloco:"VAL_vida",nome:"Participar de atividades como rafting, canoagem, rapel, espeleologia, escalada, trekking ou mountain bike.",tipo:"Variável",mod:""},
+  {id:"VALV18",bloco:"VAL_vida",nome:"Participar de atividades aquáticas de exploração de corpos d'água naturais, respeitando padrões de segurança.",tipo:"Variável",mod:""},
+  {id:"VALV19",bloco:"VAL_vida",nome:"Participar de acampamento organizado pela patrulha ou tropa de média (3 a 5 dias) ou longa (6 a 10 dias) duração.",tipo:"Variável",mod:""},
+  {id:"VALESP1",bloco:"VAL_vida",nome:"Especialidade: Esportes de Aventura, Ecoturismo ou Habilidades Escoteiras",tipo:"Ou",mod:""},
+  // COM
+  {id:"COM1",bloco:"COM",nome:"Participar de pelo menos 10 horas de ação comunitária com outras instituições locais.",tipo:"Obrigatória",mod:""},
+  {id:"COM2",bloco:"COM",nome:"Capacitar-se em curso promovido por defesa civil, cruz vermelha, bombeiros etc. e estar preparado para atuar em crises humanitárias.",tipo:"Obrigatória",mod:""},
+  {id:"COM3",bloco:"COM",nome:"Identificar os riscos de desastres naturais na comunidade e conhecer protocolos de segurança.",tipo:"Variável",mod:""},
+  {id:"COM4",bloco:"COM",nome:"Planejar uma atividade comunitária como limpeza de praça, visita a instituição ou revitalização de espaço.",tipo:"Variável",mod:""},
+  {id:"COM5",bloco:"COM",nome:"Criar uma biblioteca comunitária móvel com livros doados.",tipo:"Variável",mod:""},
+  {id:"COM6",bloco:"COM",nome:"Organizar uma campanha de arrecadação (alimentos, roupas, livros) envolvendo diferentes setores da comunidade.",tipo:"Variável",mod:""},
+  {id:"COM7",bloco:"COM",nome:"Representar a tropa em fóruns, conselhos ou encontros comunitários.",tipo:"Variável",mod:""},
+  {id:"COM8",bloco:"COM",nome:"Promover ações de educação ambiental, saúde ou cidadania em parceria com outras instituições.",tipo:"Variável",mod:""},
+  {id:"COMESP1",bloco:"COM",nome:"Especialidade: Desenvolvimento Comunitário, Ações Humanitárias ou Inclusão e Acessibilidade",tipo:"Ou",mod:""},
+  {id:"COMINSG1",bloco:"COM",nome:"Insígnia: Desafio Comunitário, Mensageiros da Paz ou Escoteiros do Mundo",tipo:"Ou",mod:""},
+  // DEM
+  {id:"DEM1",bloco:"DEM",nome:"Participar ativamente das decisões do Conselho de Patrulha, contribuindo com ideias e assumindo responsabilidades.",tipo:"Obrigatória",mod:""},
+  {id:"DEM2",bloco:"DEM",nome:"Participar ativamente das decisões da Assembleia de Tropa.",tipo:"Obrigatória",mod:""},
+  {id:"DEM3",bloco:"DEM",nome:"Participar da eleição do monitor da patrulha e das decisões dos encargos.",tipo:"Obrigatória",mod:""},
+  {id:"DEM4",bloco:"DEM",nome:"Participar de Audiência Pública e consultas populares de temas de seu interesse.",tipo:"Variável",mod:""},
+  {id:"DEM5",bloco:"DEM",nome:"Emitir o título de eleitor e pesquisar candidatos e suas propostas.",tipo:"Variável",mod:""},
+  {id:"DEM6",bloco:"DEM",nome:"Planejar e executar uma campanha para educar jovens sobre voto consciente e direitos do cidadão.",tipo:"Variável",mod:""},
+  {id:"DEM7",bloco:"DEM",nome:"Participar de ao menos uma Assembleia de Grupo Escoteiro.",tipo:"Variável",mod:""},
+  {id:"DEM8",bloco:"DEM",nome:"Participar ativamente de um Fórum de Grupo Escoteiro.",tipo:"Variável",mod:""},
+  {id:"DEM9",bloco:"DEM",nome:"Participar de grêmio estudantil ou conferências de juventude.",tipo:"Variável",mod:""},
+  {id:"DEM10",bloco:"DEM",nome:"Participar de debates, estudos de caso ou júri simulado de forma respeitosa e contributiva.",tipo:"Variável",mod:""},
+  {id:"DEM11",bloco:"DEM",nome:"Participar de dinâmicas de mediação de conflitos, praticando a escuta ativa.",tipo:"Variável",mod:""},
+  {id:"DEMESP1",bloco:"DEM",nome:"Especialidade: Equidade ou Políticas Públicas",tipo:"Ou",mod:""},
+  // HC
+  {id:"HC1",bloco:"HC",nome:"Conduzir a cerimônia de abertura de uma atividade de patrulha ou tropa.",tipo:"Obrigatória",mod:""},
+  {id:"HC2",bloco:"HC",nome:"Participar corretamente do cerimonial de hastar e arriar a bandeira nacional.",tipo:"Obrigatória",mod:"MAR"},
+  {id:"HC3",bloco:"HC",nome:"Organizar com sua patrulha uma expedição que promova o contato com povos originários, quilombolas ou comunidades ribeirinhas.",tipo:"Variável",mod:""},
+  {id:"HC4",bloco:"HC",nome:"Organizar a recepção de membros do Movimento Escoteiro de outras localidades e apresentar pontos históricos.",tipo:"Variável",mod:""},
+  {id:"HC5",bloco:"HC",nome:"Fazer tour em sua cidade, explorando pontos históricos e culturais.",tipo:"Variável",mod:""},
+  {id:"HC6",bloco:"HC",nome:"Identificar os núcleos culturais de sua região e participar de atividades com eles.",tipo:"Variável",mod:""},
+  {id:"HC7",bloco:"HC",nome:"Apresentar uma forma de expressão artística da cultura popular brasileira em um Fogo de Conselho.",tipo:"Variável",mod:""},
+  {id:"HC8",bloco:"HC",nome:"Promover um festival com música, poesia, dança e literatura típicas de uma região.",tipo:"Variável",mod:""},
+  {id:"HC9",bloco:"HC",nome:"Produzir, com sua patrulha, uma peça para uso cotidiano utilizando técnicas de artesanato brasileiro.",tipo:"Variável",mod:""},
+  {id:"HC10",bloco:"HC",nome:"Apresentar a cultura da sua cidade em um evento regional, nacional ou internacional.",tipo:"Variável",mod:""},
+  {id:"HCESP1",bloco:"HC",nome:"Especialidade: Cultura e Arte",tipo:"Ou",mod:""},
+  // PP
+  {id:"PP1",bloco:"PP",nome:"Participar de ação colaborativa sobre cultura de paz (Direitos Humanos, Diálogo Inter-religioso, Refugiados, Diversidades, Inclusão).",tipo:"Obrigatória",mod:""},
+  {id:"PP2",bloco:"PP",nome:"Organizar uma mesa redonda para jovens sobre idolatria, torcidas, tribos urbanas, intolerância religiosa ou xenofobia.",tipo:"Variável",mod:""},
+  {id:"PP3",bloco:"PP",nome:"Participar de atividades que promovam a paz e compreensão entre as pessoas.",tipo:"Variável",mod:""},
+  {id:"PP4",bloco:"PP",nome:"Participar com a patrulha de uma atividade inter-religiosa, dialogando sobre valores comuns.",tipo:"Variável",mod:""},
+  {id:"PP5",bloco:"PP",nome:"Participar de simulação das Nações Unidas debatendo questões globais sobre direitos humanos.",tipo:"Variável",mod:""},
+  {id:"PP6",bloco:"PP",nome:"Organizar e realizar uma atividade com outra unidade escoteira sobre fraternidade mundial.",tipo:"Variável",mod:""},
+  {id:"PP7",bloco:"PP",nome:"Organizar um Jantar Internacional com culinária, trajes, músicas e informações sobre Escotismo de diferentes países.",tipo:"Variável",mod:""},
+  {id:"PP8",bloco:"PP",nome:"Participar de jogos e/ou atividade de solidariedade com grupo de jovens em espaço religioso.",tipo:"Variável",mod:""},
+  {id:"PP9",bloco:"PP",nome:"Desenvolver um momento inter-religioso na sua seção, grupo escoteiro ou comunidade.",tipo:"Variável",mod:""},
+  {id:"PPESP1",bloco:"PP",nome:"Especialidade: Ciências Humanas, Direitos Humanos, Diversidades ou Diálogo Inter-Religioso",tipo:"Ou",mod:""},
+  {id:"PPINSG1",bloco:"PP",nome:"Insígnia: Lusofonia, Cone Sul ou Diálogos da Paz",tipo:"Ou",mod:""},
+  // VAL_val
+  {id:"VALR1",bloco:"VAL_val",nome:"Avaliar com seus pares a vivência da Promessa e da Lei Escoteira e realizar o Compromisso Sênior.",tipo:"Obrigatória",mod:""},
+  {id:"VALR2",bloco:"VAL_val",nome:"Participar da avaliação da sua Progressão Pessoal e dos companheiros em patrulha.",tipo:"Variável",mod:""},
+  {id:"VALR3",bloco:"VAL_val",nome:"Explicar o significado da Lei e da Promessa Escoteiras aos novos membros da patrulha.",tipo:"Variável",mod:""},
+  {id:"VALR4",bloco:"VAL_val",nome:"Auxiliar um companheiro de patrulha a realizar seu Compromisso Sênior.",tipo:"Variável",mod:""},
+  {id:"VALR5",bloco:"VAL_val",nome:"Participar de um debate de casos reais à luz dos valores escoteiros.",tipo:"Variável",mod:""},
+  // CC
+  {id:"CC1",bloco:"CC",nome:"Capacitar-se para atuar em primeiros socorros (cortes, pressão arterial, queimaduras, fraturas, RCP, etc.).",tipo:"Obrigatória",mod:""},
+  {id:"CC2",bloco:"CC",nome:"Identificar condutas que possam colocar em risco a saúde física e mental nas atividades da patrulha.",tipo:"Obrigatória",mod:""},
+  {id:"CC3",bloco:"CC",nome:"Experimentar atividades físicas ou modalidades esportivas diversas e refletir sobre a experiência.",tipo:"Variável",mod:""},
+  {id:"CC4",bloco:"CC",nome:"Pesquisar sobre saúde física e mental na juventude e apresentar propostas para melhorar hábitos.",tipo:"Variável",mod:""},
+  {id:"CC5",bloco:"CC",nome:"Conduzir oficinas ou jogos inclusivos que valorizem a diversidade de habilidades físicas.",tipo:"Variável",mod:""},
+  {id:"CC6",bloco:"CC",nome:"Participar de workshop sobre anabolizantes, drogas, álcool, tabaco ou distúrbios alimentares.",tipo:"Variável",mod:""},
+  {id:"CC7",bloco:"CC",nome:"Organizar o material de primeiros socorros da patrulha para diferentes atividades.",tipo:"Variável",mod:""},
+  {id:"CC8",bloco:"CC",nome:"Participar de workshop relacionado à prevenção das Infecções Sexualmente Transmissíveis (IST).",tipo:"Variável",mod:""},
+  {id:"CCESP1",bloco:"CC",nome:"Especialidade: Saúde",tipo:"Ou",mod:""},
+  // ESP
+  {id:"ESP1",bloco:"ESP",nome:"Conduzir momentos de silêncio, oração ou meditação em atividades da tropa, valorizando a diversidade espiritual.",tipo:"Variável",mod:""},
+  {id:"ESP2",bloco:"ESP",nome:"Participar de projetos e atividades com jovens de diferentes opções de fé e crenças.",tipo:"Variável",mod:""},
+  {id:"ESP3",bloco:"ESP",nome:"Colaborar em celebrações religiosas ou outras expressões de fé e espiritualidade da comunidade.",tipo:"Variável",mod:""},
+  {id:"ESP4",bloco:"ESP",nome:"Organizar um momento de reflexão e conexão com ambiente natural (banho de floresta, gratidão, arte manual, etc.).",tipo:"Variável",mod:""},
+  {id:"ESPESP1",bloco:"ESP",nome:"Especialidade: Diálogo Inter-Religioso",tipo:"Ou",mod:""},
+  // HS
+  {id:"HS1",bloco:"HS",nome:"Planejar um cardápio de acampamento para a patrulha, priorizando alimentação sustentável e redução de resíduos.",tipo:"Obrigatória",mod:""},
+  {id:"HS2",bloco:"HS",nome:"Praticar atividades físicas regularmente.",tipo:"Obrigatória",mod:""},
+  {id:"HS3",bloco:"HS",nome:"Manter o canto da patrulha limpo e organizado, colaborando também com a limpeza da sede.",tipo:"Variável",mod:""},
+  {id:"HS4",bloco:"HS",nome:"Planejar e realizar um almoço ou jantar equilibrado e saudável para a patrulha.",tipo:"Variável",mod:""},
+  {id:"HS5",bloco:"HS",nome:"Praticar atividades como meditação, yoga ou técnicas de relaxamento na natureza.",tipo:"Variável",mod:""},
+  {id:"HS6",bloco:"HS",nome:"Elaborar um plano pessoal de hábitos saudáveis e avaliar seu cumprimento ao longo do ciclo.",tipo:"Variável",mod:""},
+  {id:"HS7",bloco:"HS",nome:"Demonstrar manter a rotina de cuidado com seu ambiente doméstico, com autonomia e cooperação.",tipo:"Variável",mod:""},
+  {id:"HSESP1",bloco:"HS",nome:"Especialidade: Esporte ou Educação Alimentar e Nutricional",tipo:"Ou",mod:""},
+  // SM
+  {id:"SM1",bloco:"SM",nome:"Buscar informações sobre os Espaços Seguros no Movimento Escoteiro e promover seus conceitos nas atividades.",tipo:"Obrigatória",mod:""},
+  {id:"SM2",bloco:"SM",nome:"Reconhecer sinais de estresse, ansiedade ou tristeza em colegas e praticar primeiros socorros em saúde mental.",tipo:"Obrigatória",mod:""},
+  {id:"SM3",bloco:"SM",nome:"Realizar, com sua patrulha, uma campanha relacionada à saúde mental (Setembro Amarelo ou Janeiro Branco).",tipo:"Variável",mod:""},
+  {id:"SM4",bloco:"SM",nome:"Desenvolver hábitos e atividades para aliviar a tensão do dia a dia.",tipo:"Variável",mod:""},
+  {id:"SM5",bloco:"SM",nome:"Convidar profissionais da área de saúde mental para falar sobre o assunto na tropa.",tipo:"Variável",mod:""},
+  {id:"SM6",bloco:"SM",nome:"Organizar sua rotina mensal incluindo equilíbrio entre atividades digitais e reais.",tipo:"Variável",mod:""},
+  {id:"SM7",bloco:"SM",nome:"Utilizar técnicas de autoexpressão como Mindfulness, meditação, terapia, teatro ou dança.",tipo:"Variável",mod:""},
+  {id:"SMESP1",bloco:"SM",nome:"Especialidade: Saúde Mental e Bem-Estar Emocional ou Hobbies e Lazer",tipo:"Ou",mod:""},
+  // VS
+  {id:"VS1",bloco:"VS",nome:"Identificar e discutir manifestações de bullying e cyberbullying, elaborando estratégias para preveni-los.",tipo:"Obrigatória",mod:""},
+  {id:"VS2",bloco:"VS",nome:"Promover um encontro social que reúna jovens de diferentes realidades, criando ambiente de respeito à diversidade.",tipo:"Variável",mod:""},
+  {id:"VS3",bloco:"VS",nome:"Realizar uma roda de conversa para debater confiança, respeito e equilíbrio nas relações.",tipo:"Variável",mod:""},
+  {id:"VS4",bloco:"VS",nome:"Engajar-se em uma equipe de interesse para planejar e executar projetos ou conquistar especialidades.",tipo:"Variável",mod:""},
+  {id:"VS5",bloco:"VS",nome:"Promover reuniões regulares na patrulha com espaços de escuta e apoio.",tipo:"Variável",mod:""},
+  {id:"VS6",bloco:"VS",nome:"Assumir responsabilidades no ambiente familiar, contribuindo com tarefas do dia a dia.",tipo:"Variável",mod:""},
+  {id:"VS7",bloco:"VS",nome:"Convidar um colega da mesma faixa etária para participar de um Fogo de Conselho com registro de visitante.",tipo:"Variável",mod:""},
+  {id:"VSESP1",bloco:"VS",nome:"Especialidade: Saúde Sexual e Reprodutiva",tipo:"Ou",mod:""},
+];
+
+const EIXOS = [
+  {key:"Habilidades Para a Vida", css:"eixo-Habilidades"},
+  {key:"Consumo Responsável", css:"eixo-Consumo"},
+  {key:"Paz e Desenvolvimento", css:"eixo-Paz"},
+  {key:"Saúde e Bem estar", css:"eixo-Saude"},
+];
+
+// ============================================================
+// APP STATE
+// ============================================================
+let state = {
+  scriptUrl: '',
+  sheetUrl: '',
+  registro: '',
+  nome: '',
+  modalidade: 'NENHUMA',
+  checks: {}, // { atividadeId: true/false }
+  currentEixo: EIXOS[0].key,
+  saving: false,
+};
+
+// ============================================================
+// SETUP FLOW
+// ============================================================
+let selectedMod = 'NENHUMA';
+function selectMod(m) {
+  selectedMod = m;
+  document.querySelectorAll('.modal-option').forEach(el => el.classList.remove('selected'));
+  const map = { NENHUMA: 'modNone', MAR: 'modMar', AR: 'modAr' };
+  document.getElementById(map[m]).classList.add('selected');
+}
+
+function goStep1() {
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('step2').classList.remove('active');
+}
+function goStep2() {
+  const url = document.getElementById('sheetUrl').value.trim();
+  const scr = document.getElementById('scriptUrl').value.trim();
+  if (!url || !scr) { showToast('Informe os dois links antes de continuar.', 'error'); return; }
+  state.sheetUrl = url;
+  state.scriptUrl = scr;
+  document.getElementById('step1').classList.remove('active');
+  document.getElementById('step2').classList.add('active');
+}
+
+async function doLogin() {
+  const reg = document.getElementById('numRegistro').value.trim();
+  const nome = document.getElementById('nomeCompleto').value.trim();
+  if (!reg || !nome) { showToast('Preencha registro e nome.', 'error'); return; }
+  state.registro = reg;
+  state.nome = nome;
+  state.modalidade = selectedMod;
+  showLoading('Buscando seus dados...');
+  try {
+    const data = await apiCall('GET_USER', { registro: reg });
+    if (data && data.checks) {
+      state.checks = data.checks;
+      if (data.modalidade) state.modalidade = data.modalidade;
+      showToast('Dados carregados com sucesso! ✓', 'success');
+    } else {
+      state.checks = {};
+      showToast('Novo perfil criado! Bem-vindo(a)! ✓', 'success');
+      await apiCall('INIT_USER', { registro: reg, nome: nome, modalidade: state.modalidade });
+    }
+    hideLoading();
+    saveLocal();
+    launchApp();
+  } catch(e) {
+    hideLoading();
+    console.error(e);
+    showToast('Erro ao conectar. Verifique o link do Apps Script.', 'error');
+  }
+}
+
+function launchApp() {
+  document.getElementById('screenSetup').classList.remove('active');
+  document.getElementById('screenApp').classList.add('active');
+  const firstName = state.nome.split(' ')[0];
+  document.getElementById('userAvatar').textContent = firstName[0].toUpperCase();
+  document.getElementById('userName').textContent = firstName;
+  document.getElementById('summaryName').textContent = state.nome;
+  document.getElementById('summaryReg').textContent = 'Reg. #' + state.registro;
+  buildEixoTabs();
+  renderBlocos();
+  updateSummary();
+}
+
+function showChangeUser() {
+  if (confirm('Deseja trocar de usuário? Seus dados foram salvos na planilha.')) {
+    state = { scriptUrl: state.scriptUrl, sheetUrl: state.sheetUrl, registro:'', nome:'', modalidade:'NENHUMA', checks:{}, currentEixo:EIXOS[0].key, saving:false };
+    document.getElementById('screenApp').classList.remove('active');
+    document.getElementById('screenSetup').classList.add('active');
+    document.getElementById('step1').classList.remove('active');
+    document.getElementById('step2').classList.add('active');
+    document.getElementById('numRegistro').value = '';
+    document.getElementById('nomeCompleto').value = '';
+  }
+}
+
+// ============================================================
+// BUILD UI
+// ============================================================
+function eixoCss(eixo) {
+  const map = {
+    'Habilidades Para a Vida': 'eixo-Habilidades',
+    'Consumo Responsável': 'eixo-Consumo',
+    'Paz e Desenvolvimento': 'eixo-Paz',
+    'Saúde e Bem estar': 'eixo-Saude',
+  };
+  return map[eixo] || 'eixo-Habilidades';
+}
+
+function buildEixoTabs() {
+  const container = document.getElementById('eixoTabs');
+  container.innerHTML = '';
+  EIXOS.forEach(e => {
+    const tab = document.createElement('div');
+    tab.className = 'eixo-tab ' + e.css + (e.key === state.currentEixo ? ' active' : '');
+    tab.textContent = e.key;
+    tab.onclick = () => switchEixo(e.key);
+    container.appendChild(tab);
+  });
+}
+
+function switchEixo(key) {
+  state.currentEixo = key;
+  buildEixoTabs();
+  renderBlocos();
+}
+
+function renderBlocos() {
+  const container = document.getElementById('blocosList');
+  container.innerHTML = '';
+  const blocos = BLOCOS.filter(b => b.eixo === state.currentEixo);
+  blocos.forEach(bloco => {
+    const card = buildBlocoCard(bloco);
+    container.appendChild(card);
+  });
+}
+
+function getAtividades(blocoId) {
+  return ATIVIDADES_RAW.filter(a => a.bloco === blocoId);
+}
+
+function calcProgress(bloco) {
+  const ativs = getAtividades(bloco.id);
+  const mod = state.modalidade;
+  // Obrigatórias (filtradas pela modalidade)
+  const obrig = ativs.filter(a => a.tipo === 'Obrigatória' && (a.mod === '' || a.mod === mod));
+  const obrigDone = obrig.filter(a => state.checks[a.id]).length;
+  // Variáveis
+  const varList = ativs.filter(a => a.tipo === 'Variável');
+  const varDone = varList.filter(a => state.checks[a.id]).length;
+  // Ou
+  const ouList = ativs.filter(a => a.tipo === 'Ou');
+  const ouDone = ouList.filter(a => state.checks[a.id]).length;
+  const ouComplete = ouDone >= 1;
+  const varComplete = ouComplete || (varDone >= bloco.qtdVar);
+  const complete = (obrigDone >= obrig.length) && varComplete;
+
+  // Progress: obrigatórias = 50%, variáveis/ou = 50%
+  // BUT if there are no obrigatórias, variáveis/ou = 100%
+  const hasObrig = obrig.length > 0;
+  const obrigWeight = hasObrig ? 50 : 0;
+  const varWeight   = hasObrig ? 50 : 100;
+
+  const obrigPct = hasObrig ? (obrigDone / obrig.length) * obrigWeight : 0;
+
+  let varPct = 0;
+  if (ouComplete) {
+    varPct = varWeight;
+  } else {
+    const perItem = bloco.qtdVar > 0 ? varWeight / bloco.qtdVar : varWeight;
+    varPct = Math.min(varDone * perItem, varWeight);
+  }
+
+  const pct = Math.min(Math.round(obrigPct + varPct), 100);
+  return { obrig, obrigDone, varList, varDone, ouList, ouDone, ouComplete, varComplete, complete, pct };
+}
+
+function buildBlocoCard(bloco) {
+  const css = eixoCss(bloco.eixo);
+  const prog = calcProgress(bloco);
+  const card = document.createElement('div');
+  card.className = 'bloco-card ' + css;
+  card.id = 'card-' + bloco.id;
+
+  const completeHtml = prog.complete
+    ? '<span class="bloco-complete-badge">✓ Concluído</span>'
+    : '';
+
+  card.innerHTML = `
+    <div class="bloco-header" onclick="toggleBloco('${bloco.id}')">
+      <div class="bloco-header-info">
+        <span class="bloco-id-badge">${bloco.id.replace('_vida','').replace('_val','')}</span>
+        <div class="bloco-nome">${bloco.nome} ${completeHtml}</div>
+      </div>
+      <div class="bloco-chevron">▼</div>
+    </div>
+    <div class="bloco-progress-wrap">
+      <div class="bloco-progress-info">
+        <span class="bloco-progress-label">${prog.obrigDone}/${prog.obrig.length} obrig. · ${prog.ouComplete ? '✓ ' : ''}${prog.ouComplete ? 'Esp./Ins. concluída' : (prog.varDone + '/' + bloco.qtdVar + ' variáveis')}</span>
+        <span class="bloco-progress-pct">${prog.pct}%</span>
+      </div>
+      <div class="bloco-bar-bg">
+        <div class="bloco-bar-fill" style="width:${prog.pct}%"></div>
+      </div>
+    </div>
+    <div class="bloco-body" id="body-${bloco.id}"></div>
+  `;
+  return card;
+}
+
+function toggleBloco(blocoId) {
+  const card = document.getElementById('card-' + blocoId);
+  const body = document.getElementById('body-' + blocoId);
+  const isOpen = card.classList.contains('open');
+  if (!isOpen) {
+    buildBlocoBody(blocoId, body);
+    card.classList.add('open');
+  } else {
+    card.classList.remove('open');
+  }
+}
+
+function buildBlocoBody(blocoId, container) {
+  const bloco = BLOCOS.find(b => b.id === blocoId);
+  const ativs = getAtividades(blocoId);
+  const mod = state.modalidade;
+  // Get eixo colors for this bloco
+  const ec = eixoColors(bloco.eixo);
+  let html = '';
+
+  // Ações Fixas
+  const obrigAll = ativs.filter(a => a.tipo === 'Obrigatória');
+  const obrigShow = obrigAll.filter(a => a.mod === '' || a.mod === mod);
+  const obrigHidden = obrigAll.filter(a => a.mod !== '' && a.mod !== mod);
+
+  if (obrigShow.length > 0) {
+    html += `<div class="section-label">
+      <div class="section-label-icon" style="background:${ec.light};color:${ec.dark}">🔒</div>
+      <span class="section-label-text" style="color:${ec.dark}">Ações Fixas</span>
+    </div>`;
+    obrigShow.forEach(a => { html += buildAtivHtml(a, mod, ec); });
+    if (obrigHidden.length > 0) {
+      html += `<div style="font-size:11px;color:var(--cinza);padding:4px 8px;margin-bottom:6px;">
+        ${obrigHidden.length} ação(ões) fixa(s) exclusiva(s) para modalidade ${obrigHidden[0].mod} (não aplicável à sua UEL)
+      </div>`;
+    }
+  }
+
+  // Ações Variáveis
+  const varList = ativs.filter(a => a.tipo === 'Variável');
+  if (varList.length > 0) {
+    const varDone = varList.filter(a => state.checks[a.id]).length;
+    html += `<div class="section-label">
+      <div class="section-label-icon" style="background:${ec.light};color:${ec.dark}">≡</div>
+      <span class="section-label-text" style="color:${ec.dark}">Ações Variáveis</span>
+    </div>`;
+    html += `<div class="variaveis-info" style="background:${ec.light};color:${ec.dark};">
+      <span>📋</span>
+      <div>Realize <strong>${bloco.qtdVar}</strong> das ${varList.length} atividades abaixo para concluir este bloco. <strong>${varDone}/${bloco.qtdVar} realizadas.</strong></div>
+    </div>`;
+    varList.forEach(a => { html += buildAtivHtml(a, mod, ec); });
+  }
+
+  // Ou section
+  const ouList = ativs.filter(a => a.tipo === 'Ou');
+  if (ouList.length > 0) {
+    html += `<div class="section-divider">ou</div>
+    <div class="ou-section" style="background:${ec.light};border-color:${ec.border};">
+      <div class="ou-title" style="color:${ec.dark};">🏅 Conquistar ao menos uma Especialidade ou Insígnia:</div>
+      <div class="ou-desc" style="color:${ec.mid};">Conquistar 1 item abaixo substitui todas as Ações Variáveis do bloco.</div>`;
+    ouList.forEach(a => { html += buildAtivHtml(a, mod, ec); });
+    html += `</div>`;
+  }
+
+  container.innerHTML = html;
+  container.querySelectorAll('.atividade-item').forEach(item => {
+    item.onclick = () => toggleAtiv(item.dataset.id, blocoId);
+  });
+}
+
+function eixoColors(eixo) {
+  const map = {
+    'Habilidades Para a Vida': { dark:'#C62828', mid:'#E53935', light:'#FFEBEE', border:'#EF9A9A' },
+    'Consumo Responsável':     { dark:'#2E7D32', mid:'#43A047', light:'#E8F5E9', border:'#A5D6A7' },
+    'Paz e Desenvolvimento':   { dark:'#1565C0', mid:'#1E88E5', light:'#E3F2FD', border:'#90CAF9' },
+    'Saúde e Bem estar':       { dark:'#E65100', mid:'#FB8C00', light:'#FFF3E0', border:'#FFCC80' },
+  };
+  return map[eixo] || map['Habilidades Para a Vida'];
+}
+
+function buildAtivHtml(a, mod, ec) {
+  const checked = state.checks[a.id] ? 'checked' : '';
+  // ec = eixo colors; fallback to a neutral if not supplied
+  const c = ec || { dark:'#546E7A', mid:'#78909C', light:'#ECEFF1', border:'#B0BEC5' };
+  let badgeHtml = '';
+  if (a.mod === 'MAR') badgeHtml += `<span class="ativ-badge" style="background:#E3F2FD;color:#1565C0;">⛵ Modalidade Mar</span>`;
+  if (a.mod === 'AR')  badgeHtml += `<span class="ativ-badge" style="background:#E8EAF6;color:#3949AB;">✈️ Modalidade Ar</span>`;
+  if (a.tipo === 'Ou')      badgeHtml += `<span class="ativ-badge" style="background:${c.light};color:${c.dark};">🏅 Especialidade/Insígnia</span>`;
+  if (a.tipo === 'Variável') badgeHtml += `<span class="ativ-badge" style="background:${c.light};color:${c.dark};">◈ Variável</span>`;
+
+  // Checked styles injected inline so they work even without eixo parent class
+  const checkedStyle = checked
+    ? `style="background:${c.light};border-color:${c.mid};"`
+    : '';
+  const checkboxStyle = checked
+    ? `style="background:${c.dark};border-color:${c.dark};"` : '';
+  const textoStyle = checked ? `style="color:${c.dark};"` : '';
+
+  return `<div class="atividade-item ${checked}" data-id="${a.id}" ${checkedStyle}>
+    <div class="ativ-checkbox" ${checkboxStyle}>
+      <span class="ativ-check-icon">✓</span>
+    </div>
+    <div class="ativ-info">
+      <div class="ativ-texto" ${textoStyle}>${a.nome}</div>
+      ${badgeHtml ? `<div style="margin-top:4px">${badgeHtml}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// TOGGLE ATIVIDADE
+// ============================================================
+let saveDebounce = null;
+async function toggleAtiv(ativId, blocoId) {
+  state.checks[ativId] = !state.checks[ativId];
+  // Refresh body
+  const body = document.getElementById('body-' + blocoId);
+  buildBlocoBody(blocoId, body);
+  // Refresh card header
+  const bloco = BLOCOS.find(b => b.id === blocoId);
+  const prog = calcProgress(bloco);
+  const card = document.getElementById('card-' + blocoId);
+  const css = eixoCss(bloco.eixo);
+  const completeHtml = prog.complete ? '<span class="bloco-complete-badge">✓ Concluído</span>' : '';
+  card.querySelector('.bloco-nome').innerHTML = bloco.nome + ' ' + completeHtml;
+  card.querySelector('.bloco-progress-pct').textContent = prog.pct + '%';
+  card.querySelector('.bloco-bar-fill').style.width = prog.pct + '%';
+  card.querySelector('.bloco-progress-label').textContent =
+    `${prog.obrigDone}/${prog.obrig.length} obrig. · ${prog.ouComplete ? '✓ Esp./Ins. concluída' : (prog.varDone + '/' + bloco.qtdVar + ' variáveis')}`;
+  updateSummary();
+  saveLocal();
+  // Debounce save to sheet
+  if (saveDebounce) clearTimeout(saveDebounce);
+  saveDebounce = setTimeout(() => saveToSheet(), 1500);
+}
+
+function updateSummary() {
+  const total = BLOCOS.length;
+  const done = BLOCOS.filter(b => calcProgress(b).complete).length;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('bigBarFill').style.width = pct + '%';
+  document.getElementById('summaryBlocks').textContent = done + ' de ' + total + ' blocos concluídos';
+  document.getElementById('summaryPct').textContent = pct + '%';
+}
+
+// ============================================================
+// PERSISTENCE
+// ============================================================
+function saveLocal() {
+  try {
+    localStorage.setItem('scout_state_' + state.registro, JSON.stringify({
+      checks: state.checks,
+      modalidade: state.modalidade,
+      nome: state.nome,
+      scriptUrl: state.scriptUrl,
+      sheetUrl: state.sheetUrl,
+    }));
+  } catch(e) {}
+}
+
+function loadLocal(reg) {
+  try {
+    const s = localStorage.getItem('scout_state_' + reg);
+    if (s) return JSON.parse(s);
+  } catch(e) {}
+  return null;
+}
+
+// ============================================================
+// API CALLS (Google Apps Script)
+// ============================================================
+async function apiCall(action, payload) {
+  const url = state.scriptUrl;
+  if (!url) throw new Error('No script URL');
+  const body = { action, ...payload };
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(body),
+    redirect: 'follow',
+  });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const text = await res.text();
+  try { return JSON.parse(text); } catch(e) { return text; }
+}
+
+async function saveToSheet() {
+  if (state.saving) return;
+  state.saving = true;
+  try {
+    await apiCall('SAVE_USER', {
+      registro: state.registro,
+      nome: state.nome,
+      modalidade: state.modalidade,
+      checks: state.checks,
+      blocos: BLOCOS.map(b => {
+        const p = calcProgress(b);
+        return { id: b.id, nome: b.nome, completo: p.complete, pct: p.pct };
+      }),
+    });
+    showToast('Salvo na planilha ✓', 'success');
+  } catch(e) {
+    console.error('Save error:', e);
+    showToast('Erro ao salvar. Dados guardados localmente.', 'error');
+  }
+  state.saving = false;
+}
+
+// ============================================================
+// UI HELPERS
+// ============================================================
+function showLoading(msg) {
+  document.getElementById('loadingText').textContent = msg || 'Carregando...';
+  document.getElementById('loadingOverlay').style.display = 'flex';
+}
+function hideLoading() {
+  document.getElementById('loadingOverlay').style.display = 'none';
+}
+
+let toastTimer = null;
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (type ? ' ' + type : '') + ' show';
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.classList.remove('show'); }, 3000);
+}
+
+// ============================================================
+// INIT — restore from localStorage if available
+// ============================================================
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('scout_last_session');
+  if (saved) {
+    try {
+      const sess = JSON.parse(saved);
+      if (sess.scriptUrl && sess.registro) {
+        document.getElementById('sheetUrl').value = sess.sheetUrl || '';
+        document.getElementById('scriptUrl').value = sess.scriptUrl || '';
+        document.getElementById('numRegistro').value = sess.registro || '';
+        document.getElementById('nomeCompleto').value = sess.nome || '';
+        // Offer quick resume
+        if (confirm(`Retomar sessão de ${sess.nome} (Reg. ${sess.registro})?`)) {
+          state.scriptUrl = sess.scriptUrl;
+          state.sheetUrl = sess.sheetUrl;
+          state.registro = sess.registro;
+          state.nome = sess.nome;
+          state.modalidade = sess.modalidade || 'NENHUMA';
+          selectMod(state.modalidade);
+          const local = loadLocal(sess.registro);
+          if (local && local.checks) state.checks = local.checks;
+          launchApp();
+          // Attempt to sync from sheet in background
+          apiCall('GET_USER', { registro: sess.registro }).then(data => {
+            if (data && data.checks) {
+              state.checks = data.checks;
+              renderBlocos();
+              updateSummary();
+              showToast('Dados sincronizados ✓', 'success');
+            }
+          }).catch(() => {});
+          return;
+        }
+      }
+    } catch(e) {}
+  }
+});
+
+// Save last session on state change
+const origLaunch = launchApp;
+window.launchApp = function() {
+  origLaunch();
+  localStorage.setItem('scout_last_session', JSON.stringify({
+    scriptUrl: state.scriptUrl,
+    sheetUrl: state.sheetUrl,
+    registro: state.registro,
+    nome: state.nome,
+    modalidade: state.modalidade,
+  }));
+};
+</script>
+</body>
+</html>
