@@ -9,7 +9,7 @@
 :root {
   /* Habilidades Para a Vida — vermelho/rosa */
   --hab-dark:  #C62828; --hab-mid: #E53935; --hab-light: #FFEBEE; --hab-border: #EF9A9A;
-  /* Consumo Responsável — verde */
+  /* Meio Ambiente — verde */
   --con-dark:  #2E7D32; --con-mid: #43A047; --con-light: #E8F5E9; --con-border: #A5D6A7;
   /* Paz e Desenvolvimento — azul */
   --paz-dark:  #1565C0; --paz-mid: #1E88E5; --paz-light: #E3F2FD; --paz-border: #90CAF9;
@@ -803,10 +803,10 @@ const BLOCOS = [
   {id:"AL",nome:"Autonomia e liderança",qtdVar:4,ordem:2,eixo:"Habilidades Para a Vida"},
   {id:"CI",nome:"Criatividade e inovação",qtdVar:3,ordem:3,eixo:"Habilidades Para a Vida"},
   {id:"IE",nome:"Inteligência emocional",qtdVar:4,ordem:4,eixo:"Habilidades Para a Vida"},
-  {id:"CR",nome:"Consumo responsável",qtdVar:4,ordem:5,eixo:"Consumo Responsável"},
-  {id:"MC",nome:"Mudanças climáticas",qtdVar:4,ordem:6,eixo:"Consumo Responsável"},
-  {id:"PB",nome:"Preservação da biodiversidade",qtdVar:2,ordem:7,eixo:"Consumo Responsável"},
-  {id:"VAL_vida",nome:"Vida ao ar livre",qtdVar:5,ordem:8,eixo:"Consumo Responsável"},
+  {id:"CR",nome:"Consumo responsável",qtdVar:4,ordem:5,eixo:"Meio Ambiente"},
+  {id:"MC",nome:"Mudanças climáticas",qtdVar:4,ordem:6,eixo:"Meio Ambiente"},
+  {id:"PB",nome:"Preservação da biodiversidade",qtdVar:2,ordem:7,eixo:"Meio Ambiente"},
+  {id:"VAL_vida",nome:"Vida ao ar livre",qtdVar:5,ordem:8,eixo:"Meio Ambiente"},
   {id:"COM",nome:"Comunidade",qtdVar:2,ordem:9,eixo:"Paz e Desenvolvimento"},
   {id:"DEM",nome:"Democracia",qtdVar:4,ordem:10,eixo:"Paz e Desenvolvimento"},
   {id:"HC",nome:"Herança cultural",qtdVar:5,ordem:11,eixo:"Paz e Desenvolvimento"},
@@ -1016,7 +1016,7 @@ const ATIVIDADES_RAW = [
 
 const EIXOS = [
   {key:"Habilidades Para a Vida", css:"eixo-Habilidades"},
-  {key:"Consumo Responsável", css:"eixo-Consumo"},
+  {key:"Meio Ambiente", css:"eixo-Consumo"},
   {key:"Paz e Desenvolvimento", css:"eixo-Paz"},
   {key:"Saúde e Bem estar", css:"eixo-Saude"},
 ];
@@ -1120,7 +1120,7 @@ function showChangeUser() {
 function eixoCss(eixo) {
   const map = {
     'Habilidades Para a Vida': 'eixo-Habilidades',
-    'Consumo Responsável': 'eixo-Consumo',
+    'Meio Ambiente': 'eixo-Consumo',
     'Paz e Desenvolvimento': 'eixo-Paz',
     'Saúde e Bem estar': 'eixo-Saude',
   };
